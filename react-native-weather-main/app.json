@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "WeatherNow",
+    "slug": "WeatherNow",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/splash-icon.png",  
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.ntoled.WeatherNow",
+      
+        "permissions": [
+          "android.permission.INTERNET",
+          "android.permission.ACCESS_FINE_LOCATION",
+          "android.permission.ACCESS_COARSE_LOCATION"
+        ],
+        "config": {
+        "usesCleartextTraffic": true
+      }
+
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "97e63fae-c201-472c-b592-58d8767440fc"
+      }
+    }
+  }
+}

@@ -12,7 +12,7 @@ export default function WeatherScreen({ route }) {
   useEffect(() => {
     if (!coords) return;
     fetchWeatherByCoords(coords.latitude, coords.longitude);
-  }, []);
+  }, [coords]);
 
   const fetchWeatherByCoords = async (lat, lon) => {
     try {
@@ -55,8 +55,21 @@ export default function WeatherScreen({ route }) {
       ) : weather ? (
         <Animated.View entering={SlideInUp.springify().damping(20)} style={styles.weatherBox}>
           <Text style={styles.cityName}>{weather.name}</Text>
+          <View style={styles.cardContainer}>
+            <View style={styles.tempCard}>
+              <Text style={styles.cardTitle}>Temperature</Text>
+              <Text style={styles.cardValue}>{Math.round(weather.main.temp)}°C</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Humidity</Text>
+              <Text style={styles.cardValue}>{weather.main.humidity}%</Text>
+            </View>
+            <View style={styles.card}>
+              <Text style={styles.cardTitle}>Wind Speed</Text>
+              <Text style={styles.cardValue}>{weather.wind.speed} m/s</Text>
+            </View>
+          </View>
           <Text style={styles.desc}>{weather.weather[0].description}</Text>
-          <Text style={styles.temp}>{Math.round(weather.main.temp)}°C</Text>
           <Image
             source={{ uri: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png` }}
             style={styles.weatherIcon}
@@ -130,10 +143,51 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     color: '#555',
   },
-  temp: {
-    fontSize: 40,
+  cardContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginVertical: 20,
+  },
+  tempCard: {
+    backgroundColor: '#ffeb3b', // צבע שונה כדי להדגיש את הכרטיס
+    padding: 20,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 2,
+    width: '30%',
+    alignItems: 'center',
+  },
+  card: {
+    backgroundColor: '#e0f7fa',
+    padding: 15,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 2,
+    width: '30%',
+    alignItems: 'center',
+  },
+  cardTitle: {
+    fontSize: 16,
     fontWeight: 'bold',
-    color: '#f44336',
+    color: '#00796b',
+  },
+  cardValue: {
+    fontSize: 28, // גודל טקסט גדול יותר
+    fontWeight: 'bold',
+    color: '#004d40',
   },
   weatherIcon: {
     width: 120,

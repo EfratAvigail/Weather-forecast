@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, ActivityIndicator, StyleSheet, Alert } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import * as Location from 'expo-location';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -32,23 +32,59 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Icon name="location" size={60} color="#2196f3" style={styles.icon} />
+      <Icon name="location" size={100} color="#ffffff" style={styles.icon} />
       <Text style={styles.title}>Welcome to Weatherly</Text>
       {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#ffffff" />
       ) : (
-        <Button
-          title="View Weather"
+        <TouchableOpacity
+          style={styles.button}
           onPress={() => navigation.navigate('Weather', { coords: location })}
-          color="#2196f3"
-        />
+        >
+          <Text style={styles.buttonText}>View Weather</Text>
+        </TouchableOpacity>
       )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#e3f2fd' },
-  title: { fontSize: 28, fontWeight: 'bold', marginBottom: 20 },
-  icon: { marginBottom: 20 },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#4a90e2', // צבע רקע כהה יותר
+    padding: 20,
+  },
+  title: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    marginBottom: 30,
+    color: '#ffffff', // טקסט לבן
+  },
+  icon: {
+    marginBottom: 30,
+    backgroundColor: '#2196f3', // צבע רקע לאייקון
+    borderRadius: 50,
+    padding: 20,
+  },
+  button: {
+    backgroundColor: '#ff4081', // צבע רקע לכפתור
+    borderRadius: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    shadowColor: '#000', // הוספת צל
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 5,
+  },
+  buttonText: {
+    color: '#ffffff', // טקסט לבן בכפתור
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
 });

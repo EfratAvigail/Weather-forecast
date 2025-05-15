@@ -51,46 +51,98 @@ export default function WeatherScreen({ route }) {
       </Pressable>
 
       {loading ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#ffffff" />
       ) : weather ? (
-        
-<Animated.View entering={SlideInUp.springify().damping(20)} style={styles.weatherBox}>
-
+        <Animated.View entering={SlideInUp.springify().damping(20)} style={styles.weatherBox}>
           <Text style={styles.cityName}>{weather.name}</Text>
           <Text style={styles.desc}>{weather.weather[0].description}</Text>
           <Text style={styles.temp}>{Math.round(weather.main.temp)}°C</Text>
           <Image
             source={{ uri: `http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png` }}
-            style={{ width: 100, height: 100 }}
+            style={styles.weatherIcon}
           />
         </Animated.View>
       ) : (
-        <Text style={{ marginTop: 20 }}>No weather data</Text>
+        <Text style={styles.noDataText}>No weather data</Text>
       )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center',  paddingTop: 40 },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    paddingTop: 40,
+    backgroundColor: '#f0f4f8',
+  },
   input: {
     borderWidth: 1,
-    borderColor: '#aaa',
-    padding: 10,
-    borderRadius: 8,
+    borderColor: '#ccc',
+    padding: 15,
+    borderRadius: 10,
     width: '80%',
-    backgroundColor: '#fff',
+    backgroundColor: '#ffffff',
     marginBottom: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   button: {
-    backgroundColor: '#2196f3',
-    padding: 10,
-    borderRadius: 8,
+    backgroundColor: '#1e88e5',
+    padding: 12,
+    borderRadius: 10,
     marginBottom: 20,
+    width: '80%',
+    alignItems: 'center',
   },
-  buttonText: { color: 'white', fontWeight: 'bold' },
-  weatherBox: { alignItems: 'center', marginTop: 20 },
-  cityName: { fontSize: 28, fontWeight: 'bold' },
-  desc: { fontSize: 18, textTransform: 'capitalize' },
-  temp: { fontSize: 36, fontWeight: 'bold', color: '#f44336' },
+  buttonText: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  weatherBox: {
+    alignItems: 'center',
+    marginTop: 20,
+    padding: 20,
+    backgroundColor: '#ffffff',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 3,
+  },
+  cityName: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  desc: {
+    fontSize: 20,
+    textTransform: 'capitalize',
+    color: '#555',
+  },
+  temp: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    color: '#f44336',
+  },
+  weatherIcon: {
+    width: 120,
+    height: 120,
+    marginTop: 10,
+  },
+  noDataText: {
+    marginTop: 20,
+    fontSize: 18,
+    color: '#777',
+  },
 });
